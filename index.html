@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sakura Road</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <style>
+      #motivationDialog { box-sizing: border-box; width: min(92vw, 440px); border: 1px solid #f4c7d7; border-radius: 18px; padding: 20px; color: #553b46; background: #fff; box-shadow: 0 12px 35px #9d5b7833; }
+      #motivationDialog::backdrop { background: #3a283877; }
+      #motivationDialog h2 { font-size: 1.05rem; margin: 0 0 10px; }
+      #motivationDialog p { font-size: .85rem; margin: 0 0 16px; }
+      .motivation-choices { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 5px; }
+      .motivation-choices button { min-width: 0; padding: 10px 2px; border: 1px solid #efb9cc; border-radius: 10px; background: #fff4f8; color: #a94f76; font-size: 1.15rem; cursor: pointer; }
+      .motivation-choices small { display: block; font-size: .57rem; line-height: 1.35; margin-top: 5px; overflow-wrap: anywhere; }
+      #skipMotivation { width: 100%; margin-top: 14px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; color: #66545c; cursor: pointer; }
+    </style>
+
+  </head>
+  <body>
+    <main class="app">
+      <nav class="tabs">
+        <button id="homeTab" class="active">🏠 ホーム</button>
+        <button id="recordTab">📅 学習カレンダー</button>
+        <button id="goalTab">🎯 目標設定</button>
+      </nav>
+
+      <header>
+        <h1>🌸 Sakura Road</h1>
+        <p>積み重ねた努力が、やがて花開く。</p>
+      </header>
+      <div id="homePage">
+        <section class="card streak-card">
+          <div class="streak-summary"><span>🔥 連続学習</span><strong><span id="streakCount">0</span> 日</strong></div>
+          <p id="streakMessage">今日も桜を咲かせよう！</p>
+        </section>
+
+        <section class="card task-card">
+          <h2>📚 今日のタスク</h2>
+          <p id="taskHint" class="task-hint">目標設定タブで最低タスクを設定してね。</p>
+          <div id="todayTaskList" class="task-list"></div>
+          <div class="add-task-row">
+            <input id="newTask" type="text" maxlength="100" placeholder="追加タスクを入力" aria-label="追加タスク" />
+            <button type="button" id="addTask">＋ 追加</button>
+          </div>
+          <p id="taskStatus" aria-live="polite"></p>
+          <!-- 既存の記録機能と互換性を保つために残す -->
+          <input type="hidden" id="goal" />
+        </section>
+
+        <section class="card flower-card">
+          <h2>今日の桜</h2>
+
+          <div class="tree" id="tree">
+            <svg viewBox="0 0 300 260" id="sakuraSVG">
+              <g id="branches">
+                <path
+                  d="M150 250 L150 95
+                        M150 155 L80 80
+                        M150 145 L220 75
+                        M150 110 L110 35
+                        M150 110 L190 30
+                        M80 80 L50 55
+                        M220 75 L250 45"
+                  stroke="#8b5e4a"
+                  stroke-width="10"
+                  fill="none"
+                  stroke-linecap="round"
+                />
+              </g>
+              <g id="flowers"></g>
+            </svg>
+          </div>
+          <p id="message">今日の学習を記録しよう！</p>
+          <p class="rating-note">今日の頑張りを自分で選んでね！</p>
+
+          <div class="buttons">
+            <button data-rating="Excellent">Excellent!</button>
+            <button data-rating="Great">Great!</button>
+            <button data-rating="Good">Good!<small>最低タスク達成</small></button>
+          </div>
+
+          <button id="save">今日の記録を保存</button>
+          <p id="saveStatus" aria-live="polite"></p>
+        </section>
+
+        <p id="history" class="compact-history">まだ記録がありません。</p>
+      </div>
+
+      <!-- 記録確認画面 -->
+      <div id="recordPage" style="display: none">
+        <section class="card">
+          <h2>🌸 今月の桜並木</h2>
+          <p id="monthTitle"></p>
+
+          <div id="sakuraRoad"></div>
+
+          <button type="button" id="exportCSV">📥 学習記録をCSVで出力</button>
+
+          <p id="dayDetail">日付をクリックすると記録が表示されます。</p>
+
+          <div id="editForm" style="display: none">
+            <h3 id="editDateTitle">記録の編集</h3>
+
+            <label for="editGoal">学習目標</label>
+            <input
+              type="text"
+              id="editGoal"
+              placeholder="例：英単語を30個覚える"
+            />
+
+            <p>達成度</p>
+
+            <div class="edit-buttons">
+              <button type="button" data-edit-rating="Excellent">Excellent!</button>
+              <button type="button" data-edit-rating="Great">Great!</button>
+              <button type="button" data-edit-rating="Good">Good! 最低タスク</button>
+            </div>
+
+            <button type="button" id="saveEdit">変更を保存</button>
+            <button type="button" id="cancelEdit">キャンセル</button>
+            <button type="button" id="deleteEdit">この日の記録を削除</button>
+
+            <p id="editStatus" aria-live="polite"></p>
+          </div>
+        </section>
+      </div>
+
+      <!-- 目標設定画面 -->
+      <div id="goalPage" style="display: none">
+        <section class="card">
+          <h2>🎯 学習目標を設定</h2>
+
+          <label for="monthlyGoal">1か月後の目標</label>
+          <input
+            type="text"
+            id="monthlyGoal"
+            placeholder="例：TOEICで700点を取る"
+          />
+
+          <label for="minimumTask">毎日の最低タスク</label>
+          <input
+            type="text"
+            id="minimumTask"
+            placeholder="例：単語帳を開く"
+          />
+
+          <button type="button" id="saveGoals">目標を保存する</button>
+
+          <p id="goalSaveStatus" aria-live="polite"></p>
+        </section>
+      </div>
+
+      <!-- 学習記録を保存した後の任意アンケート -->
+      <dialog id="motivationDialog" aria-labelledby="motivationTitle">
+        <h2 id="motivationTitle">🌱 明日も学習したいと思いますか？</h2>
+        <p>今の気持ちに近い数字を選んでね。（回答は任意です）</p>
+        <div class="motivation-choices" role="group" aria-label="翌日の学習意欲">
+          <button type="button" data-motivation="1">1<small>まったく思わない</small></button>
+          <button type="button" data-motivation="2">2<small>あまり思わない</small></button>
+          <button type="button" data-motivation="3">3<small>どちらともいえない</small></button>
+          <button type="button" data-motivation="4">4<small>やや思う</small></button>
+          <button type="button" data-motivation="5">5<small>とても思う</small></button>
+        </div>
+        <button type="button" id="skipMotivation" class="motivation-skip">今回は回答しない</button>
+      </dialog>
+    </main>
+  </body>
+</html>

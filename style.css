@@ -1,0 +1,545 @@
+css_backup
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Yu Gothic", sans-serif;
+    background: #fff5f8;
+    color: #493d43;
+}
+
+.app {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+h1 {
+    color: #d66d91;
+    font-size: 30px;
+}
+
+header p {
+    color: #8b7580;
+}
+
+.card {
+    background: white;
+    padding: 24px;
+    margin-bottom: 18px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px #e9c7d255;
+    text-align: center;
+}
+
+h2 {
+    font-size: 19px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #e7c6d2;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.tree {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    min-height: 260px;
+}
+
+.tree svg {
+    width: 100%;
+    height: auto;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin: 24px 0;
+}
+
+.buttons button {
+    flex: 1;
+    padding: 15px 5px;
+    border: 2px solid #f2d7e1;
+    border-radius: 12px;
+    background: #fff7fa;
+    cursor: pointer;
+    font-size: 26px;
+}
+
+.buttons button.selected {
+    border-color: #d66d91;
+    background: #ffe3ed;
+}
+
+small {
+    display: block;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+#save {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #d66d91;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#saveStatus {
+    color: #b65479;
+    font-size: 14px;
+}
+
+
+
+/* 記録編集フォーム */
+#editForm {
+    margin-top: 20px;
+    padding: 20px;
+    background: #fff5f8;
+    border-radius: 14px;
+    text-align: left;
+}
+
+#editForm h3 {
+    text-align: center;
+}
+
+#editGoal {
+    margin-top: 8px;
+}
+
+.edit-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.edit-buttons button {
+    flex: 1;
+    padding: 12px 5px;
+    background: white;
+    border: 1px solid #e7c6d2;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.edit-buttons button.selected {
+    background: #ffe3ed;
+    border: 2px solid #d66d91;
+}
+
+#saveEdit {
+    width: 100%;
+    padding: 13px;
+    background: #d66d91;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#cancelEdit {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    background: transparent;
+    border: 1px solid #e7c6d2;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#editStatus {
+    color: #b65479;
+    text-align: center;
+}
+
+
+/* 記録削除ボタン */
+#deleteEdit {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: white;
+    color: #c45a72;
+    border: 1px solid #e8a9b9;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#deleteEdit:hover {
+    background: #fff0f4;
+}
+
+
+/* CSV出力ボタン */
+#exportCSV {
+    width: 100%;
+    padding: 13px;
+    margin: 16px 0;
+    background: #79ad93;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#exportCSV:hover {
+    background: #62997e;
+}
+
+
+/* ===== ホーム・記録確認タブ ===== */
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    flex: 1;
+    min-width: 0;
+    padding: 13px 8px;
+    border: 1px solid #e7c6d2;
+    border-radius: 12px;
+    background: white;
+    color: #9a6478;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tabs button.active {
+    background: #d66d91;
+    color: white;
+    border-color: #d66d91;
+}
+
+
+/* ===== 桜並木の記録表示 ===== */
+
+#sakuraRoad {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px;
+    background: #fff5f8;
+    border-radius: 14px;
+}
+
+.road-tree {
+    min-width: 0;
+    min-height: 90px;
+    padding: 12px 5px;
+    background: white;
+    border: 1px solid #efd4df;
+    border-radius: 12px;
+    color: #493d43;
+    font-size: 24px;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.road-tree small {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.road-tree:active {
+    background: #ffe3ed;
+}
+
+#dayDetail {
+    margin-top: 16px;
+    padding: 12px;
+    background: #fff5f8;
+    border-radius: 10px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+
+/* ===== スマホ向け調整 ===== */
+
+@media (max-width: 480px) {
+
+    .app {
+        padding: 16px 12px;
+    }
+
+    header {
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .card {
+        padding: 18px 14px;
+        border-radius: 16px;
+    }
+
+    h2 {
+        font-size: 17px;
+    }
+
+    .tree {
+        max-width: 260px;
+        min-height: 0;
+    }
+
+    .buttons {
+        gap: 7px;
+    }
+
+    .buttons button {
+        min-width: 0;
+        padding: 12px 3px;
+        font-size: 23px;
+    }
+
+    .buttons small {
+        font-size: 10px;
+    }
+
+    .edit-buttons {
+        gap: 5px;
+    }
+
+    .edit-buttons button {
+        min-width: 0;
+        padding: 12px 3px;
+        font-size: 11px;
+    }
+
+    #sakuraRoad {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .road-tree {
+        min-height: 80px;
+        font-size: 21px;
+    }
+
+    .road-tree small {
+        font-size: 11px;
+    }
+
+    #editForm {
+        padding: 14px;
+    }
+}
+
+
+/* ===== 目標設定 ===== */
+
+#goalPage .card {
+    text-align: left;
+}
+
+#goalPage h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#goalPage label {
+    display: block;
+    margin: 20px 0 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#saveGoals {
+    width: 100%;
+    margin-top: 25px;
+    padding: 14px;
+    background: #d66d91;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#goalSaveStatus {
+    color: #b65479;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* 3つのタブをスマホ幅に収める */
+.tabs {
+    gap: 6px;
+}
+
+.tabs button {
+    padding: 12px 4px;
+    font-size: 12px;
+}
+/* Sakura Road: 追加タスクとコンパクトなホーム */
+.streak-card { padding: 12px 18px; margin-bottom: 12px; }
+.streak-summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; }
+.streak-summary strong { color: #d66d91; font-size: 21px; white-space: nowrap; }
+.streak-card #streakMessage { font-size: 12px; margin: 6px 0 0; color: #8b7580; }
+.task-card { padding: 16px; margin-bottom: 12px; text-align: left; }
+.task-card h2 { margin: 0 0 8px; text-align: center; }
+.task-hint { font-size: 12px; color: #8b7580; line-height: 1.5; }
+.task-list { display: grid; gap: 6px; }
+.task-item { display: flex; align-items: center; gap: 8px; background: #fff7fa; border-radius: 10px; padding: 9px; }
+.task-item label { display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0; font-size: 13px; overflow-wrap: anywhere; }
+.task-item input[type="checkbox"] { width: 18px; height: 18px; flex: none; accent-color: #d66d91; }
+.task-done { text-decoration: line-through; color: #9c9096; }
+.minimum-tag { color: #b65479; background: #ffe3ed; border-radius: 8px; padding: 4px 7px; white-space: nowrap; }
+.remove-task { border: 0; background: transparent; color: #a7657b; padding: 6px; cursor: pointer; }
+.add-task-row { display: flex; gap: 7px; margin-top: 9px; }
+.add-task-row input { flex: 1; min-width: 0; padding: 10px; }
+#addTask { border: 0; background: #d66d91; color: white; border-radius: 10px; padding: 0 12px; white-space: nowrap; cursor: pointer; }
+#taskStatus { margin: 7px 0 0; color: #8b7580; font-size: 12px; }
+.flower-card { padding: 14px 16px; margin-bottom: 8px; }
+.flower-card h2 { margin: 0; }
+.flower-card .tree { max-width: 210px; min-height: 0; margin: 4px auto; }
+.flower-card #message { font-size: 12px; margin: 4px 0; }
+.flower-card .buttons { margin: 10px 0; }
+.flower-card .buttons button { padding: 9px 3px; font-size: 21px; }
+.flower-card #save { padding: 12px; font-size: 14px; }
+.flower-card #saveStatus { margin: 5px 0 0; }
+.compact-history { margin: 5px 0; text-align: center; font-size: 11px; color: #8b7580; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .app { padding-top: 12px; } header { margin-bottom: 12px; } header h1 { font-size: 23px; margin: 8px 0; } header p { font-size: 11px; margin: 5px 0; } }
+
+/* Good / Great / Excellent の表示 */
+.buttons button { font-size: 14px; font-weight: bold; padding: 12px 3px; }
+.buttons button:disabled { cursor: default; opacity: 1; color: #8c5570; }
+.buttons button.selected:disabled { background: #ffe3ed; border-color: #d66d91; }
+.buttons small { font-size: 10px; font-weight: normal; }
+.rating-note { color: #8b7580; font-size: 12px; }
+
+
+
+/* Sakura Road: ホーム画面コンパクト化
+   既存の style.css の【一番下】に追記してください。
+   桜の描画・評価・保存ロジックには触れません。 */
+
+/* 余白を詰めつつ、押しやすい操作サイズは維持 */
+#homePage { display: block; }
+#homePage .card { box-sizing: border-box; }
+#homePage .streak-card { padding: 9px 14px; margin-bottom: 8px; }
+#homePage .streak-summary { line-height: 1.2; }
+#homePage .streak-summary strong { font-size: 19px; }
+#homePage #streakMessage { margin: 3px 0 0; font-size: 11px; line-height: 1.25; }
+
+#homePage .task-card { padding: 11px 13px; margin-bottom: 8px; }
+#homePage .task-card h2 { margin: 0 0 5px; font-size: 17px; line-height: 1.25; }
+#homePage .task-hint { margin: 3px 0 7px; font-size: 11px; line-height: 1.3; }
+#homePage .task-list { gap: 4px; }
+#homePage .task-item { padding: 5px 8px; min-height: 34px; }
+#homePage .task-item label { font-size: 12px; }
+#homePage .task-item input[type="checkbox"] { width: 18px; height: 18px; }
+#homePage .minimum-tag { padding: 3px 5px; font-size: 10px; }
+#homePage .remove-task { padding: 5px; font-size: 11px; }
+#homePage .add-task-row { margin-top: 6px; }
+#homePage .add-task-row input { padding: 7px 9px; min-height: 36px; box-sizing: border-box; }
+#homePage #addTask { min-height: 36px; padding: 0 11px; }
+#homePage #taskStatus { margin: 4px 0 0; font-size: 11px; }
+
+#homePage .flower-card { padding: 10px 13px 12px; margin-bottom: 5px; }
+#homePage .flower-card h2 { margin: 0; font-size: 17px; line-height: 1.25; }
+#homePage .flower-card .tree { max-width: 170px; width: 100%; min-height: 0; margin: 0 auto; }
+#homePage .flower-card #sakuraSVG { display: block; width: 100%; height: auto; }
+#homePage .flower-card #message { margin: 0; font-size: 11px; line-height: 1.25; }
+#homePage .flower-card .rating-note { margin: 4px 0; font-size: 11px; line-height: 1.25; }
+#homePage .flower-card .buttons { display: flex; gap: 7px; margin: 7px 0; }
+#homePage .flower-card .buttons button { flex: 1; min-width: 0; min-height: 47px; padding: 7px 2px; font-size: clamp(13px, 3.7vw, 17px); line-height: 1.15; }
+#homePage .flower-card .buttons button small { display: block; margin-top: 3px; font-size: 9px; }
+#homePage .flower-card #save { padding: 10px; min-height: 40px; font-size: 13px; }
+#homePage .flower-card #saveStatus { margin: 3px 0 0; font-size: 11px; }
+#homePage .compact-history { margin: 4px 0; font-size: 10px; }
+
+@media (max-width: 480px) {
+  .app { padding-top: 7px; }
+  .tabs { margin-bottom: 6px; }
+  header { margin-bottom: 7px; }
+  header h1 { font-size: 21px; margin: 3px 0; }
+  header p { font-size: 10px; margin: 2px 0; }
+  #homePage .flower-card .tree { max-width: 155px; }
+}
+
+/* 画面が低いスマホだけ桜をもう少し小さくする */
+@media (max-height: 750px) and (max-width: 480px) {
+  #homePage .flower-card .tree { max-width: 135px; }
+}
+
+/* Sakura Road: 7列の学習カレンダー（style.css の末尾に追記） */
+#recordPage #sakuraRoad.learning-calendar {
+  display: grid !important;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  gap: 4px !important;
+  width: 100%;
+  margin: 12px 0 16px;
+  align-items: stretch;
+}
+#recordPage .calendar-weekday {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8d6475;
+  padding: 3px 0;
+}
+#recordPage .calendar-day {
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 65px;
+  padding: 4px 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: #fff;
+  border: 1px solid #f2d6e0;
+  border-radius: 9px;
+  color: #674b55;
+  cursor: pointer;
+}
+#recordPage .calendar-day-number { font-size: 11px; line-height: 1; }
+#recordPage .calendar-flowers {
+  display: block;
+  font-size: clamp(9px, 2.3vw, 13px);
+  letter-spacing: -3px;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+#recordPage .calendar-empty { color: #cbbbc0; letter-spacing: 0; font-size: 16px; }
+#recordPage .calendar-today { background: #fff0f5; border: 2px solid #db79a0; }
+#recordPage .calendar-future { opacity: .65; }
+#recordPage .calendar-blank { min-width: 0; }
+#recordPage .calendar-day:focus-visible { outline: 3px solid #d66d91; outline-offset: 2px; }
+@media (max-width: 400px) {
+  #recordPage #sakuraRoad.learning-calendar { gap: 3px !important; }
+  #recordPage .calendar-day { height: 56px; border-radius: 7px; }
+  #recordPage .calendar-flowers { font-size: 10px; letter-spacing: -3px; }
+}
