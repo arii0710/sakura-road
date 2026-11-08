@@ -543,3 +543,66 @@ small {
   #recordPage .calendar-day { height: 56px; border-radius: 7px; }
   #recordPage .calendar-flowers { font-size: 10px; letter-spacing: -3px; }
 }
+
+/* ===== スマホ画面の横はみ出し修正 ===== */
+
+/* 余白を含めて横幅を計算 */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ページ全体 */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* アプリとカード */
+.app,
+.card,
+.task-card,
+#recordPage,
+#homePage {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* タスク入力欄 */
+.add-task-row {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+}
+
+.add-task-row input {
+  flex: 1;
+  min-width: 0;
+  width: 0;
+}
+
+.add-task-row button {
+  flex-shrink: 0;
+}
+
+/* カレンダーを画面幅に収める */
+.learning-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.calendar-day {
+  min-width: 0;
+  width: 100%;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.calendar-flowers {
+  font-size: clamp(9px, 2.5vw, 16px);
+  white-space: nowrap;
+}
